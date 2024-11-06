@@ -1,4 +1,4 @@
-package Abstract;
+package model;
 
 public class Resident extends Entity {
     Resident(String role, int health, int damage) {

@@ -1,4 +1,4 @@
-package Abstract;
+package model;
 
 public class Entity {
 

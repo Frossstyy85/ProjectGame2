@@ -1,4 +1,4 @@
-import Abstract.*;
+import model.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
