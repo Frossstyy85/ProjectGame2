@@ -33,7 +33,7 @@ public class Entity {
         toPunch.takeHit(this.damage);
     }
 
-    private void takeHit(int damage){
+    public void takeHit(int damage){
         this.health -= damage;
     }
 

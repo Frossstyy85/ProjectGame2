@@ -1,48 +1,49 @@
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-    Resident resident;
-    Burglar burglar;
+
+    Entity resident;
+    Entity burglar;
 
     @BeforeEach
     void resetEntity(){
-        resident = new Resident(10,10);
-        burglar = new Burglar(10,10);
+        resident = Entity.createResident();
+        burglar = Entity.createBurglar();
     }
 
     @Test
     void isConscious(){
-        assertTrue(resident.isConscious());
-        assertTrue(burglar.isConscious());
+        assertTrue(burglar.isConscious() && resident.isConscious());
     }
 
     @Test
     void isNotConscious(){
-        resident.punch(burglar);
-        burglar.punch(resident);
 
-        assertFalse(resident.isConscious());
-        assertFalse(burglar.isConscious());
+        burglar.takeHit(burglar.getHealth());
+        resident.takeHit(resident.getHealth());
+
+        assertFalse(resident.isConscious() && burglar.isConscious());
     }
+
 
     @Test
-    void takeDamage(){
+    void takeExpectedDamage(){
 
-        Entity attacker = resident;
-        Entity defender = burglar;
+        int expectedHealth = resident.getHealth() - burglar.getDamage();
 
-        int expectedHealth = defender.getHealth() - attacker.getDamage();
+        burglar.punch(resident);
 
-        attacker.punch(defender);
-
-        assertEquals(defender.getHealth(), expectedHealth);
+        assertEquals(resident.getHealth(), expectedHealth);
     }
 
-
-
+    @AfterAll
+    static void afterAll(){
+        System.out.println("Testing completed");
+    }
 
 }
